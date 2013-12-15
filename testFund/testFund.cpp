@@ -7,6 +7,9 @@
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_core247d.lib")
 #pragma comment(lib, "opencv_calib3d247d.lib")
+#else
+#pragma comment(lib, "opencv_core247.lib")
+#pragma comment(lib, "opencv_calib3d247.lib")
 #endif
 
 using namespace std;
@@ -147,12 +150,12 @@ int main(int argc, char **argv)
 		Point3f line = left_lines[i];
 		Point2f point = left_picture[i];
 		
-		float error = line.x*point.x + line.y*point.y + line.z;
+		float error = abs(line.x*point.x + line.y*point.y + line.z);
 		left_error += error;
 
 		line = right_lines[i];
 		point = right_picture[i];
-		error = line.x*point.x + line.y*point.y + line.z;
+		error = abs(line.x*point.x + line.y*point.y + line.z);
 		right_error += error;
 	}
 	cout << "left error " << left_error << endl << "right error " << right_error << endl;
