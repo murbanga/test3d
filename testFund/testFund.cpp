@@ -88,10 +88,10 @@ Cam generateCam(float f, float width, float height, const Vec3f &eye, const Vec3
 
 void dump(const char *filename, const vector<Point2f> &vec)
 {
-	ofstream left_file(filename);
-	if(left_file.is_open()){
+	ofstream f(filename);
+	if(f.is_open()){
 		for(int i = 0; i < vec.size(); ++i)
-			left_file << vec[i].x << " " << vec[i].y << endl;
+			f << vec[i].x << " " << vec[i].y << endl;
 	}
 }
 
@@ -100,12 +100,12 @@ int main(int argc, char **argv)
 	vector<Point3f> obj = generateObject();
 	Mat fund;
 	
-	Cam left = generateCam(1.5, 1, 1, Vec3f(-1, -1, 5), Vec3f(0, 0, 0), Vec3f(1,0,0));
+	Cam left = generateCam(1, 10, 10, Vec3f(20, 0, 0), Vec3f(N*CELL_WIDTH/2, N*CELL_WIDTH/2, 0), Vec3f(0,0,1));
 	cout << "left cam\n" << left.camera << endl;
 	cout << "rvec\n" << left.rvec << endl;
 	cout << "tvec\n" << left.tvec << endl;
 
-	Cam right = generateCam(1, 1, 1, Vec3f(0, 1, 5), Vec3f(0, 0, 0), Vec3f(1,0,0));
+	Cam right = generateCam(1, 10, 10, Vec3f(0, 1, 5), Vec3f(N*CELL_WIDTH/2, N*CELL_WIDTH/2, 0), Vec3f(0,0,1));
 	cout << "right cam\n" << right.camera << endl;
 	cout << "rvec\n" << right.rvec << endl;
 	cout << "tvec\n" << right.tvec << endl;
@@ -122,7 +122,7 @@ int main(int argc, char **argv)
 		projectPoints(obj, right.rvec, right.tvec, right.camera, noArray(), right_picture);
 		dump("right_proj.txt", right_picture);
 
-#if 0
+#if 1
 		vector<Point2f> partial_left_picture(POINTS_FOR_SEARCH);
 		vector<Point2f> partial_right_picture(POINTS_FOR_SEARCH);
 

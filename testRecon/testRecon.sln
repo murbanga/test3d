@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testRecon", "testRecon.vcxproj", "{E20868D6-CD9D-4CF1-9F46-C59C1A5D6B20}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testFund", "..\testFund\testFund.vcxproj", "{5DB8531C-89C6-461B-B425-DAA6261D8C49}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E20868D6-CD9D-4CF1-9F46-C59C1A5D6B20}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E20868D6-CD9D-4CF1-9F46-C59C1A5D6B20}.Debug|Win32.Build.0 = Debug|Win32
+		{E20868D6-CD9D-4CF1-9F46-C59C1A5D6B20}.Release|Win32.ActiveCfg = Release|Win32
+		{E20868D6-CD9D-4CF1-9F46-C59C1A5D6B20}.Release|Win32.Build.0 = Release|Win32
+		{5DB8531C-89C6-461B-B425-DAA6261D8C49}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5DB8531C-89C6-461B-B425-DAA6261D8C49}.Debug|Win32.Build.0 = Debug|Win32
+		{5DB8531C-89C6-461B-B425-DAA6261D8C49}.Release|Win32.ActiveCfg = Release|Win32
+		{5DB8531C-89C6-461B-B425-DAA6261D8C49}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
