@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/features2d/features2d.hpp>
 #include <opencv2/nonfree/features2d.hpp>
@@ -12,6 +13,7 @@
 #pragma comment(lib, "opencv_features2d247d.lib")
 #pragma comment(lib, "opencv_nonfree247d.lib")
 #pragma comment(lib, "opencv_calib3d247d.lib")
+#pragma comment(lib, "opencv_imgproc247d.lib")
 #else
 #endif
 
@@ -52,12 +54,11 @@ void detect_keypoints(Mat images[2], vector<Point2f> points[2], int detector_thr
 			imshow((i ? "Left keypoints" : "Right keypoints"), img_keypoints);
 		}
 	}
-	
 
 	cout << "find matches..." << endl;
 	BFMatcher matcher(NORM_L2, true);
 	vector<DMatch> matches;
-	matcher.match( descr[0], descr[1], matches);
+	matcher.match(descr[0], descr[1], matches);
 
 	if(show_debug_windows){
 		Mat img_matches;
@@ -86,18 +87,21 @@ int main(int argc, char **argv)
 	Mat images[2];
 
 	for(int i = 0; i < 2; ++i){
-		images[i] = imread(image_filename[i], CV_LOAD_IMAGE_COLOR);
-		if(!images[i].data){
+		Mat image;
+		image = imread(image_filename[i], CV_LOAD_IMAGE_COLOR);
+		if(!image.data){
 			cout << "fail to open image \"" << image_filename[i] << "\"" << endl;
 			return -1;
 		}
+		cvtColor(image, images[i], COLOR_BGR2GRAY);
 	}
 
 	vector<Point2f> key_points[2];
 	detect_keypoints(images, key_points, detector_threshold, show_debug_windows);
 
 	cout << "find fundamental matrix..." << endl;
-	Mat fund = findFundamentalMat(key_points[0], key_points[1]);
+	vector<uchar> mask(key_points[0].size());
+	Mat fund = findFundamentalMat(key_points[0], key_points[1], CV_FM_RANSAC, 4.0, 0.99, mask);
 	cout << fund << endl;
 
 	if(check_fundamental_matrix){
